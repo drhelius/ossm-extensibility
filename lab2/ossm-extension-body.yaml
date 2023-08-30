@@ -1,13 +1,13 @@
-apiVersion: maistra.io/v1
-kind: ServiceMeshExtension
+apiVersion: extensions.istio.io/v1alpha1
+kind: WasmPlugin
 metadata:
   name: ossm-example-body-extension
 spec:
-  config:
+  pluginConfig:
     secret-word: secret
-  image: quay.io/isanchez/ossm-example-body-extension:1.0.0
-  phase: PostAuthZ
+  url: oci://quay.io/isanchez/ossm-example-body-extension:1.0.0
   priority: 100
-  workloadSelector:
-    labels:
+  phase: STATS
+  selector:
+    matchLabels:
       app: httpbin
